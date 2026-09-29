@@ -1,10 +1,32 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useState } from "react";
+import { useAuth } from "./../hooks/useAuth.js";
 import "../auth.form.scss";
 
 const Login = () => {
-  function handleSubmit(e) {
+  const { loading, handleLogin } = useAuth();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(e) {
     e.preventDefault();
+    const isLoggedIn = await handleLogin(email, password);
+
+    if (!isLoggedIn) return;
+
+    setEmail("");
+    setPassword("");
+    navigate("/");
   }
+
+  if (loading)
+    return (
+      <main>
+        <h1>........Loading........</h1>
+      </main>
+    );
 
   return (
     <main>
@@ -18,6 +40,8 @@ const Login = () => {
               id="email"
               name="email"
               placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -28,6 +52,8 @@ const Login = () => {
               id="password"
               name="password"
               placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 

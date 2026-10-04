@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth.js";
-import "../auth.form.scss";
+import "../styles/auth.form.scss";
 
 const Register = () => {
   const navigate = useNavigate();

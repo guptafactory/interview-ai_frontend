@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { useAuth } from "./../hooks/useAuth.js";
-import "../auth.form.scss";
+import "../styles/auth.form.scss";
 
 const Login = () => {
   const { loading, handleLogin } = useAuth();
